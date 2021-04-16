@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "251594929722",
+    "project_id": "ui-authen-wstf",
+    "storage_bucket": "ui-authen-wstf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:251594929722:android:1d9c31afd060e557382703",
+        "android_client_info": {
+          "package_name": "com.example.ui_authen"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "251594929722-5enc18oiv63aooavfma1nsbg4mofqoan.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ui_authen",
+            "certificate_hash": "f1a8f10f8e184da7522ff4708aa7e3df73f7859a"
+          }
+        },
+        {
+          "client_id": "251594929722-sgndvm0vho41uvq6klsas16qunnign0c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTvEhxZStdifsnMDxkKdggQO7hx-Mu75Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "251594929722-sgndvm0vho41uvq6klsas16qunnign0c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

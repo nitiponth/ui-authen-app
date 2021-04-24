@@ -1,17 +1,22 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:ui_authen/Screens/login_success/components/Monster.dart';
 import 'package:ui_authen/Screens/login_success/login_success.dart';
 import 'package:ui_authen/components/aleart.dart';
 import 'package:ui_authen/components/rounded_button.dart';
 import 'package:ui_authen/constants.dart';
 
-class AddForm extends StatefulWidget {
+class EditForm extends StatefulWidget {
+  final Monster monster;
+  final String monsterId;
+
+  const EditForm({Key key, @required this.monster, @required this.monsterId})
+      : super(key: key);
   @override
-  _AddFormState createState() => _AddFormState();
+  _EditFormState createState() => _EditFormState();
 }
 
-class _AddFormState extends State<AddForm> {
+class _EditFormState extends State<EditForm> {
   CollectionReference monster =
       FirebaseFirestore.instance.collection('monsters');
   final _formKey = GlobalKey<FormState>();
@@ -43,9 +48,17 @@ class _AddFormState extends State<AddForm> {
           buildJobFormField(),
           SizedBox(height: size.height * 0.025),
           RoundedButton(
-            text: "ADD INFORMATION",
+            text: "EDIT INFORMATION",
             press: () {
-              addDataIn();
+              editData();
+              print('edit!');
+            },
+          ),
+          RoundedButton(
+            text: "DELETE THIS INFORMATION",
+            color: Colors.red,
+            press: () {
+              deleteData();
             },
           ),
         ],
@@ -53,8 +66,20 @@ class _AddFormState extends State<AddForm> {
     );
   }
 
-  addDataIn() {
-    monster.add({
+  deleteData(){
+    monster.doc(widget.monsterId).delete().then((value) {
+      print('Data deleted!');
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+        return LoginSuccessScreen();
+      }));
+    }).catchError((e) {
+      print('Failed: $e');
+      showAlertDialog(context);
+    });
+  }
+
+  editData() {
+    monster.doc(widget.monsterId).update({
       'name': nameController.text.trim(),
       'level': int.parse(levelController.text.trim()),
       'type': typeController.text.trim(),
@@ -62,7 +87,7 @@ class _AddFormState extends State<AddForm> {
       'base': int.parse(baseController.text.trim()),
       'job': int.parse(jobController.text.trim()),
     }).then((value) {
-      print('Data Added!');
+      print('Data edited!');
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
         return LoginSuccessScreen();
       }));
@@ -76,7 +101,7 @@ class _AddFormState extends State<AddForm> {
     return TextFormField(
       onSaved: (newValue) {},
       onChanged: (value) {},
-      controller: nameController,
+      controller: nameController..text = widget.monster.name,
       decoration: InputDecoration(
         labelText: "Monster name",
         hintText: "Example : Baphomet",
@@ -96,7 +121,7 @@ class _AddFormState extends State<AddForm> {
     return TextFormField(
       onSaved: (newValue) {},
       onChanged: (value) {},
-      controller: levelController,
+      controller: levelController..text = widget.monster.level.toString(),
       decoration: InputDecoration(
         labelText: "Monster level",
         hintText: "Example : 81",
@@ -115,7 +140,7 @@ class _AddFormState extends State<AddForm> {
     return TextFormField(
       onSaved: (newValue) {},
       onChanged: (value) {},
-      controller: typeController,
+      controller: typeController..text = widget.monster.type,
       decoration: InputDecoration(
         labelText: "Monster type",
         hintText: "Example : Shadow",
@@ -134,7 +159,7 @@ class _AddFormState extends State<AddForm> {
     return TextFormField(
       onSaved: (newValue) {},
       onChanged: (value) {},
-      controller: hpController,
+      controller: hpController..text = widget.monster.hp.toString(),
       decoration: InputDecoration(
         labelText: "Monster HP",
         hintText: "Example : 668000",
@@ -153,7 +178,7 @@ class _AddFormState extends State<AddForm> {
     return TextFormField(
       onSaved: (newValue) {},
       onChanged: (value) {},
-      controller: baseController,
+      controller: baseController..text = widget.monster.base.toString(),
       decoration: InputDecoration(
         labelText: "Monster Base Exp",
         hintText: "Example : 107250",
@@ -172,7 +197,7 @@ class _AddFormState extends State<AddForm> {
     return TextFormField(
       onSaved: (newValue) {},
       onChanged: (value) {},
-      controller: jobController,
+      controller: jobController..text = widget.monster.job.toString(),
       decoration: InputDecoration(
         labelText: "Monster Job Exp",
         hintText: "Example : 37895",

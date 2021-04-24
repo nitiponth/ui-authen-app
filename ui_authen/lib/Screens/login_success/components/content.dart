@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:ui_authen/Screens/Edit_Data/edit_screen.dart';
 import 'package:ui_authen/Screens/login_success/components/Monster.dart';
 
 class Content extends StatefulWidget {
@@ -22,7 +22,7 @@ class _ContentState extends State<Content> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return SizedBox(
-              width: size.width*0.9,
+              width: size.width * 0.9,
               child: Column(
                   children:
                       snapshot.data.docs.map((doc) => buildItem(doc)).toList()),
@@ -37,7 +37,7 @@ class _ContentState extends State<Content> {
     Monster monster = new Monster.fromJson(doc.data());
     return Card(
       clipBehavior: Clip.antiAlias,
-        child: Column(
+      child: Column(
         children: [
           ListTile(
             title: Text(monster.name),
@@ -45,12 +45,19 @@ class _ContentState extends State<Content> {
               'Level ' + monster.level.toString(),
               style: TextStyle(color: Colors.black.withOpacity(0.6)),
             ),
+            onLongPress: () => {
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) {
+                return EditScreen(monster: monster, monsterId: doc.id.toString());
+              }))
+            },
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 15.0),
             child: Text(
               "Element : ${monster.type} | HP : ${monster.hp.toString()} | Base Exp: ${monster.base.toString()} | Job Exp ${monster.job.toString()}",
-              style: TextStyle(color: Colors.black.withOpacity(0.8), fontSize: 12),
+              style:
+                  TextStyle(color: Colors.black.withOpacity(0.8), fontSize: 12),
               textAlign: TextAlign.left,
             ),
           ),
@@ -59,7 +66,6 @@ class _ContentState extends State<Content> {
     );
   }
 }
-
 
 class DataContent extends StatelessWidget {
   const DataContent({

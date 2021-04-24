@@ -55,17 +55,13 @@ class _SignFormState extends State<SignForm> {
             email: emailController.text.trim(),
             password: passwordController.text.trim())
         .then((user) {
-      // print("signed in ${emailController.text.trim()} Success!!");
-      Navigator.push(context, MaterialPageRoute(builder: (context) {
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
         return LoginSuccessScreen();
       }));
     }).catchError((error) {
       print(error);
       showAlertDialog(context);
     });
-
-    // print(emailController.text.trim());
-    // print(passwordController.text.trim());
   }
 
   TextFormField buildEmailFormField() {

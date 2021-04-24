@@ -11,7 +11,6 @@ class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-
     Size size = MediaQuery.of(context).size;
     return Background(
       child: SingleChildScrollView(
@@ -19,14 +18,11 @@ class Body extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              "Hi, KMUTNB",
+              "ROX DATABASE",
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             SizedBox(height: size.height * 0.05),
-            SvgPicture.asset(
-              "assets/icons/chat.svg",
-              height: size.height * 0.35,
-            ),
+            Image.asset('assets/icons/ro_icon.png',  height: size.height * 0.4),
             SizedBox(height: size.height * 0.05),
             LoginButt(),
             SignUpbutt(),
@@ -49,7 +45,7 @@ class ContentButt extends StatelessWidget {
       text: "Monster Data",
       color: Color(0xFFBA68C8),
       textColor: Colors.white,
-      press: () {
+      press: () { 
         Navigator.push(
           context,
           MaterialPageRoute(

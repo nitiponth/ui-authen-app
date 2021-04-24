@@ -24,7 +24,7 @@ class Body extends StatelessWidget {
 
     void signOut() {
       _auth.signOut();
-      Navigator.push(context, MaterialPageRoute(builder: (context) {
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
         return LoginScreen();
       }));
     }

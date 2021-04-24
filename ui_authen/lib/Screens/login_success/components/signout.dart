@@ -27,7 +27,7 @@ class _SignOutButton extends State<SignOutButton> {
 
   signout() {
     _auth.signOut();
-    Navigator.push(context, MaterialPageRoute(builder: (context) {
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
       return WelcomeScreen();
     }));
   }

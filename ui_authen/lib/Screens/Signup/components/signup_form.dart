@@ -45,7 +45,7 @@ class _SignUpFormState extends State<SignUpForm> {
     String email = emailController.text.trim();
     String password = passwordController.text.trim();
     String passwordCheck = passwordCheckController.text.trim();
-    if (password == passwordCheck && password.length >= 6) {
+    if (password == passwordCheck && password.length >= 1) {
       _auth
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((user) {

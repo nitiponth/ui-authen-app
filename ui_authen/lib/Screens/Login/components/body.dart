@@ -53,7 +53,7 @@ class Body extends StatelessWidget {
             (!checkAuth()
                 ? AlreadyHaveAnAccountCheck(
                     press: () {
-                      Navigator.push(
+                      Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
                           builder: (context) {
